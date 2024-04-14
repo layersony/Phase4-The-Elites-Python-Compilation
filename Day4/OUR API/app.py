@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import validates
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books.db'
@@ -13,6 +14,8 @@ class Book(db.Model):
     title = db.Column(db.String(200))
     author = db.Column(db.String(200))
     genre = db.Column(db.String(200))
+
+    @validates(title)
 
 # Get all the Boooks
 @app.route('/', methods=['GET'])
